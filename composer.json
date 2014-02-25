@@ -1,0 +1,26 @@
+{
+    "name": "ideea/form-extra-bundle",
+    "description": "Form extra bundle",
+    "keywords": ["form", "extra", "annotation", "form annotation"],
+    "homepage": "https://github.com/ZhukV/FormExtraBundle",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vitaliy Zhuk",
+            "email": "zhuk2205@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/form": "~2.3"
+    },
+
+    "autoload": {
+        "psr-0": { "Ideea\\FormExtraBundle": "" }
+    },
+
+    "target-dir": "Ideea/FormExtraBundle"
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="ideea.form_extra.metadata_factory.class">Ideea\FormExtraBundle\Form\Metadata\MetadataFactory</parameter>
+        <parameter key="ideea.form_extra.metadata_driver.annotation.class">Ideea\FormExtraBundle\Form\Metadata\Driver\AnnotationDriver</parameter>
+
+        <parameter key="form.factory.class">Ideea\FormExtraBundle\Form\FormFactory</parameter>
+
+        <parameter key="ideea.form.extension.allow_extra_fields.class">Ideea\FormExtraBundle\Form\Extension\AllowExtraFieldsExtension</parameter>
+    </parameters>
+
+    <services>
+        <!-- Form metadata -->
+        <service id="ideea.form_extra.metadata_factory" class="%ideea.form_extra.metadata_factory.class%" />
+        <service id="ideea.form_extra.metadata_driver.annotation" class="%ideea.form_extra.metadata_driver.annotation.class%" public="false">
+            <argument type="service" id="annotation_reader" />
+            <tag name="form_extra.metadata.driver" />
+        </service>
+
+        <!-- Override Symfony form factory -->
+        <service id="form.factory" class="%form.factory.class%">
+            <argument type="service" id="form.registry" />
+            <argument type="service" id="form.resolved_type_factory" />
+            <argument type="service" id="ideea.form_extra.metadata_factory" />
+        </service>
+
+        <!-- Form extensions -->
+        <service id="ideea.form.extension.allow_extra_fields" class="%ideea.form.extension.allow_extra_fields.class%">
+            <tag name="form.type_extension" alias="form" />
+        </service>
+
+        <!-- Form types -->
+        <service id="form.type.model" class="Ideea\FormExtraBundle\Form\Type\ModelType">
+            <tag name="form.type" alias="model" />
+            <argument type="service" id="ideea.form_extra.metadata_factory" />
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+</container>
