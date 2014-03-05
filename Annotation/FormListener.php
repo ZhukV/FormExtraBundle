@@ -24,5 +24,5 @@ class FormListener
     /** @var integer */
     public $priority = 0;
     /* @var array */
-    public $groups = array();
+    public $groups = array('Default');
 }
