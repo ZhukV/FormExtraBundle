@@ -107,7 +107,7 @@ class AnnotationDriver implements DriverInterface
 
                     $fieldMetadata = new FieldMetadata($fieldAnnotation->type, $name, $property->getName(), $options, $fieldAnnotation->choices, $fieldAnnotation->groups);
                     $fieldMetadata->position = $fieldAnnotation->position;
-                    $fields[$name] = $fieldMetadata;
+                    $fields[] = $fieldMetadata;
                 }
             }
         }
